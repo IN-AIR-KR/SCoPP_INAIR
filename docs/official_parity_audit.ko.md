@@ -35,6 +35,8 @@
 - 전체 AOI를 빠뜨리지 않기 위한 `any_overlap` 정책을 제공한다.
 - perimeter 표본 간격은 3 m가 아니라 `W/8`을 기본값으로 사용한다.
 - 논문 설명에 맞춰 자체 2차원 KD-tree로 nearest-neighbor를 계산한다.
+- 실제 격자 이동은 AOI/no-fly 제약을 지키는 4-neighbor A* transit 경로로 전개한다.
+  이는 논문의 방문 순서 이후에 추가한 실내 실행 제약이다.
 
 ## 구현된 공식 clustering profile
 

@@ -39,6 +39,8 @@ Multi-Robot Teams for Monitoring Non-Convex Areas*에서 제안한 SCoPP를
 4. Coverage path planning
    - 각 노드는 시작 위치에서 가장 가까운 미방문 cell 중심을 반복 선택한다.
    - 2차원 KD-tree nearest-neighbor를 사용한다.
+   - 목표 cell 사이는 AOI 내부의 유효 cell만 사용하는 4-neighbor A* 경로로 전개한다.
+   - coverage 목표와 단순 통과용 transit cell을 구분해 기록한다.
    - 공식 구현과의 정합성을 위해 마지막에 시작점으로 복귀한다.
 5. 실험 평가
    - 노드별 cell 수와 이동거리, workload 편차, makespan, 전체 이동거리 및 단계별
@@ -107,8 +109,8 @@ python scripts/build_path_ui.py examples/maps/indoor_lab.yaml --profile official
 - 노드: 4개
 - conflict cell: 15개
 - 노드별 할당 cell: `26, 28, 28, 27`
-- 시작점 복귀를 포함한 makespan 거리: 약 `35.032 m`
-- 테스트: 32개
+- 시작점 복귀와 인접 cell 이동을 포함한 makespan 거리: 약 `37.723 m`
+- 테스트: 44개
 
 실행시간은 시스템 상태에 따라 달라지므로 새 실험마다 다시 측정해야 한다.
 
@@ -145,6 +147,7 @@ metres; geographic conversion is outside the current laboratory scope.
   cluster-to-node association;
 - conflict detection and the greedy `cell count + B × d0` auction;
 - KD-tree nearest-neighbor coverage routes returning to each node start;
+- deterministic 4-neighbor A* expansion between consecutive coverage targets;
 - JSON experiment metrics and CSV/PNG node-count scaling reports.
 
 ### Quick start

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from heapq import heappop, heappush
 from math import hypot
 
 from scopp.algorithm.auction import AllocationResult
@@ -62,12 +63,15 @@ class NodePath:
     start: XY
     cell_ids: tuple[str, ...]
     waypoints: tuple[XY, ...]
+    motion_cell_ids: tuple[str, ...]
+    motion_waypoints: tuple[XY, ...]
+    return_motion_index: int
     distance_m: float
 
     @property
     def trajectory(self) -> tuple[XY, ...]:
         """Official-code trajectory: start, all cell centres, then return."""
-        return (self.start,) + self.waypoints + ((self.start,) if self.waypoints else ())
+        return (self.start,) + self.motion_waypoints + ((self.start,) if self.motion_waypoints else ())
 
 
 @dataclass(frozen=True, slots=True)
@@ -98,11 +102,53 @@ def _ordered_nearest_neighbor(start: XY, items: tuple[_PointItem, ...]) -> tuple
     return tuple(route)
 
 
+class NoAdjacentPathError(ValueError):
+    """Raised when two coverage targets cannot be connected by valid cells."""
+
+
+def _adjacent_path(start_id: str, goal_id: str, cells_by_id, ids_by_key) -> tuple[str, ...]:
+    """Return a deterministic 4-neighbor A* path including both endpoints."""
+    if start_id == goal_id:
+        return (start_id,)
+    start, goal = cells_by_id[start_id], cells_by_id[goal_id]
+    start_key, goal_key = (start.row, start.col), (goal.row, goal.col)
+    frontier: list[tuple[int, int, int, tuple[int, int]]] = []
+    heappush(frontier, (0, 0, 0, start_key))
+    came_from: dict[tuple[int, int], tuple[int, int] | None] = {start_key: None}
+    cost = {start_key: 0}
+    sequence = 0
+    neighbor_offsets = ((-1, 0), (0, -1), (0, 1), (1, 0))
+    while frontier:
+        _, current_cost, _, current = heappop(frontier)
+        if current == goal_key:
+            keys: list[tuple[int, int]] = []
+            cursor: tuple[int, int] | None = current
+            while cursor is not None:
+                keys.append(cursor)
+                cursor = came_from[cursor]
+            return tuple(ids_by_key[key] for key in reversed(keys))
+        if current_cost != cost[current]:
+            continue
+        for dr, dc in neighbor_offsets:
+            neighbor = (current[0] + dr, current[1] + dc)
+            if neighbor not in ids_by_key:
+                continue
+            new_cost = current_cost + 1
+            if new_cost < cost.get(neighbor, 10**18):
+                cost[neighbor] = new_cost
+                came_from[neighbor] = current
+                sequence += 1
+                heuristic = abs(neighbor[0] - goal_key[0]) + abs(neighbor[1] - goal_key[1])
+                heappush(frontier, (new_cost + heuristic, new_cost, sequence, neighbor))
+    raise NoAdjacentPathError(f"no valid 4-neighbor path between {start_id!r} and {goal_id!r}")
+
+
 def plan_coverage_paths(mapped: DiscretizedMap, allocation: AllocationResult) -> PathPlan:
     """Order each node's assigned cell centres using KD-tree nearest neighbor."""
     if len(allocation.nodes) != len(mapped.source.node_starts):
         raise ValueError("allocation node count does not match map node count")
     cell_by_id = {cell.id: cell for cell in mapped.cells}
+    id_by_key = {(cell.row, cell.col): cell.id for cell in mapped.cells}
     stable_index = {cell.id: index for index, cell in enumerate(mapped.cells)}
     paths: list[NodePath] = []
     node_by_id = {node.id: node for node in mapped.source.node_starts}
@@ -114,12 +160,24 @@ def plan_coverage_paths(mapped: DiscretizedMap, allocation: AllocationResult) ->
         items = tuple(_PointItem(cell_by_id[cell_id].center, stable_index[cell_id], cell_id) for cell_id in allocated.cell_ids)
         ordered = _ordered_nearest_neighbor(node.position, items)
         waypoints = tuple(item.point for item in ordered)
-        distance = 0.0
-        previous = node.position
-        for waypoint in waypoints:
-            distance += hypot(waypoint[0] - previous[0], waypoint[1] - previous[1])
-            previous = waypoint
-        if waypoints:
-            distance += hypot(node.position[0] - previous[0], node.position[1] - previous[1])
-        paths.append(NodePath(allocated.cluster_index, node.id, node.position, tuple(item.cell_id for item in ordered), waypoints, distance))
+        if not ordered:
+            paths.append(NodePath(allocated.cluster_index, node.id, node.position, (), (), (), (), 0, 0.0))
+            continue
+        start_cell = min(mapped.cells, key=lambda cell: ((cell.center[0] - node.position[0]) ** 2 + (cell.center[1] - node.position[1]) ** 2, stable_index[cell.id]))
+        motion_ids: list[str] = [start_cell.id]
+        current_id = start_cell.id
+        for target in ordered:
+            segment = _adjacent_path(current_id, target.cell_id, cell_by_id, id_by_key)
+            motion_ids.extend(segment[1:])
+            current_id = target.cell_id
+        return_motion_index = len(motion_ids)
+        motion_ids.extend(_adjacent_path(current_id, start_cell.id, cell_by_id, id_by_key)[1:])
+        motion_waypoints = tuple(cell_by_id[cell_id].center for cell_id in motion_ids)
+        distance = hypot(motion_waypoints[0][0] - node.position[0], motion_waypoints[0][1] - node.position[1])
+        distance += sum(hypot(b[0] - a[0], b[1] - a[1]) for a, b in zip(motion_waypoints, motion_waypoints[1:]))
+        distance += hypot(node.position[0] - motion_waypoints[-1][0], node.position[1] - motion_waypoints[-1][1])
+        paths.append(NodePath(allocated.cluster_index, node.id, node.position, tuple(item.cell_id for item in ordered), waypoints, tuple(motion_ids), motion_waypoints, return_motion_index, distance))
     return PathPlan(tuple(paths))
+
+
+__all__ = ["NoAdjacentPathError", "NodePath", "PathPlan", "plan_coverage_paths"]

@@ -45,6 +45,9 @@ adaptations in this repository.
   larger than the entire indoor cell.
 - The local nearest-neighbor implementation uses a KD-tree as described by the
   paper; the official default code currently selects brute force.
+- Consecutive coverage targets are expanded into valid-cell 4-neighbor A*
+  transit paths. This is an indoor execution constraint after the paper's visit
+  ordering stage.
 
 These adaptations must be reported in indoor experiment results and must not be
 presented as byte-for-byte official-code reproduction.

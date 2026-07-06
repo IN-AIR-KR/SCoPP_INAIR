@@ -19,6 +19,7 @@ def test_paths_visit_every_allocated_cell_once() -> None:
         assert len(path.waypoints) == len(path.cell_ids)
         assert path.trajectory[0] == path.start
         assert path.trajectory[-1] == path.start
+        assert len(path.motion_cell_ids) == len(path.motion_waypoints)
         assert path.distance_m >= 0
     assert plan.makespan_distance_m == max(path.distance_m for path in plan.paths)
 
@@ -47,3 +48,13 @@ def test_total_distance_matches_path_sum() -> None:
     mapped = discretize_map(load_map(ROOT / "examples/maps/indoor_lab.yaml"))
     plan = plan_coverage_paths(mapped, allocate_conflict_cells(mapped, cluster_map(mapped)))
     assert plan.total_distance_m == pytest.approx(sum(path.distance_m for path in plan.paths))
+
+
+def test_motion_path_uses_only_four_neighbor_cells() -> None:
+    mapped = discretize_map(load_map(ROOT / "examples/maps/indoor_lab.yaml"))
+    plan = plan_coverage_paths(mapped, allocate_conflict_cells(mapped, cluster_map(mapped)))
+    by_id = {cell.id: cell for cell in mapped.cells}
+    for path in plan.paths:
+        for first, second in zip(path.motion_cell_ids, path.motion_cell_ids[1:]):
+            a, b = by_id[first], by_id[second]
+            assert abs(a.row - b.row) + abs(a.col - b.col) == 1

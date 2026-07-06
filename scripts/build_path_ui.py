@@ -29,7 +29,7 @@ def build_data(map_file: Path, config: ScoppConfig) -> dict[str, object]:
         "makespan": plan.makespan_distance_m,
         "totalDistance": plan.total_distance_m,
         "cells": [{"id": cell.id, "vertices": cell.vertices, "owner": owners[cell.id]} for cell in mapped.cells],
-        "nodes": [{"index": path.cluster_index, "id": path.node_id, "start": path.start, "cells": len(path.cell_ids), "distance": path.distance_m, "cellIds": path.cell_ids, "waypoints": path.waypoints, "trajectory": path.trajectory} for path in plan.paths],
+        "nodes": [{"index": path.cluster_index, "id": path.node_id, "start": path.start, "cells": len(path.cell_ids), "distance": path.distance_m, "cellIds": path.cell_ids, "motionCellIds": path.motion_cell_ids, "returnMotionIndex": path.return_motion_index, "waypoints": path.waypoints, "trajectory": path.trajectory} for path in plan.paths],
     }
 
 

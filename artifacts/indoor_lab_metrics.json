@@ -9,40 +9,42 @@
   "conflict_cell_count": 15,
   "clustering_iterations": 5,
   "clustering_converged": true,
+  "clustering_profile": "deterministic_lloyd",
+  "random_seed": null,
   "auction_bias": 0.5,
   "node_metrics": [
     {
       "node_id": "node-01",
       "cell_count": 26,
-      "distance_m": 28.114416031055313
+      "distance_m": 30.516680952821428
     },
     {
       "node_id": "node-02",
       "cell_count": 28,
-      "distance_m": 28.376838998357055
+      "distance_m": 30.277443776496916
     },
     {
       "node_id": "node-03",
       "cell_count": 28,
-      "distance_m": 35.031599995765845
+      "distance_m": 37.723225167056036
     },
     {
       "node_id": "node-04",
       "cell_count": 27,
-      "distance_m": 30.835335757100673
+      "distance_m": 35.73355039969029
     }
   ],
   "cell_count_range": 2,
   "cell_count_cv": 0.030427750370233025,
-  "distance_range_m": 6.9171839647105315,
-  "distance_cv": 0.09073507335030839,
-  "makespan_distance_m": 35.031599995765845,
-  "total_distance_m": 122.35819078227888,
+  "distance_range_m": 7.4457813905591195,
+  "distance_cv": 0.09665433740449435,
+  "makespan_distance_m": 37.723225167056036,
+  "total_distance_m": 134.25090029606466,
   "timings": {
-    "discretization_s": 0.005084500007797033,
-    "clustering_s": 0.018884200006141327,
-    "auction_s": 9.329999738838524e-05,
-    "path_planning_s": 0.0019518000044627115,
-    "total_s": 0.026014600007329136
+    "discretization_s": 0.02055889999610372,
+    "clustering_s": 0.029121200001100078,
+    "auction_s": 0.00021940001170150936,
+    "path_planning_s": 0.0033224999788217247,
+    "total_s": 0.05322410000371747
   }
 }

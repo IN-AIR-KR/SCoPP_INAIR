@@ -10,16 +10,16 @@
       27
     ],
     "node_distances_m": [
-      28.114416031055313,
-      28.376838998357055,
-      35.031599995765845,
-      30.835335757100673
+      30.516680952821428,
+      30.277443776496916,
+      37.723225167056036,
+      35.73355039969029
     ],
     "conflict_cells": 15,
     "cell_count_range": 2,
-    "makespan_distance_m": 35.031599995765845,
-    "total_distance_m": 122.35819078227888,
-    "runtime_s": 0.027401500003179535
+    "makespan_distance_m": 37.723225167056036,
+    "total_distance_m": 134.25090029606466,
+    "runtime_s": 0.06785250001121312
   },
   "official_minibatch": {
     "profile": "official_minibatch",
@@ -31,20 +31,20 @@
       29
     ],
     "node_distances_m": [
-      34.21638690651277,
-      47.77217095528979,
-      28.015027278508732,
-      35.71402993753951
+      44.971154706724306,
+      50.655871196903654,
+      30.277443776496913,
+      41.60180612126224
     ],
     "conflict_cells": 19,
     "cell_count_range": 19,
-    "makespan_distance_m": 47.77217095528979,
-    "total_distance_m": 145.71761507785078,
-    "runtime_s": 0.04703970000264235
+    "makespan_distance_m": 50.655871196903654,
+    "total_distance_m": 167.50627580138712,
+    "runtime_s": 0.07928629999514669
   },
   "difference": {
     "conflict_cells": 4,
-    "makespan_distance_m": 12.740570959523943,
-    "total_distance_m": 23.3594242955719
+    "makespan_distance_m": 12.932646029847618,
+    "total_distance_m": 33.25537550532246
   }
 }
