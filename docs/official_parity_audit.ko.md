@@ -43,7 +43,8 @@
 `official_minibatch` profile을 추가했다. 이 profile은 공식 코드의
 `MiniBatchKMeans`, 최대 10회, `W/8` tolerance와 greedy cluster-to-node 연결을
 사용한다. 재현 가능한 실험을 위해 random seed를 명시적으로 기록한다. 기존 방식은
-`deterministic_lloyd` 연구 profile로 유지한다.
+`deterministic_lloyd`는 비기본 레거시/테스트 profile로만 유지하며 공식 비교 및
+KPI 산출물에는 사용하지 않는다.
 
 다만 현재 scikit-learn 1.9에서 과거 공식 코드 당시의 라이브러리 내부 동작까지 완전히
 재현한다고 보장할 수는 없다. `batch_size=100`, `n_init=3`으로 과거 기본값을 명시했으며,

@@ -57,8 +57,9 @@ presented as byte-for-byte official-code reproduction.
 The `official_minibatch` profile now uses `MiniBatchKMeans`, at most 10
 iterations, `W/8` tolerance, and the public code's greedy cluster-to-node
 association. A random seed is explicitly recorded for reproducibility. The
-original implementation remains available as the `deterministic_lloyd` research
-profile.
+original implementation remains available as the non-default
+`deterministic_lloyd` legacy/test profile. It is excluded from official
+comparison and KPI artifacts.
 
 Exact historical parity with the scikit-learn version used by the public code
 is not guaranteed. The profile explicitly sets the older defaults
