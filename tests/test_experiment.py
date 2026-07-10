@@ -11,8 +11,10 @@ def test_indoor_experiment_report_contains_paper_metrics() -> None:
     report = run_experiment(ROOT / "examples/maps/indoor_lab.yaml")
     assert report.cell_count == 109
     assert report.node_count == 4
-    assert report.conflict_cell_count == 15
-    assert report.cell_count_range == 2
+    assert report.clustering_profile == "official_minibatch"
+    assert report.random_seed == 0
+    assert report.conflict_cell_count == 19
+    assert report.cell_count_range == 19
     assert report.makespan_distance_m == pytest.approx(max(node.distance_m for node in report.node_metrics))
     assert report.total_distance_m == pytest.approx(sum(node.distance_m for node in report.node_metrics))
     assert report.clustering_iterations <= 10

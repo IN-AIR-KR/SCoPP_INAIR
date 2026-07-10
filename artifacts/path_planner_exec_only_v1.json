@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "map_name": "Arbitrary indoor laboratory map",
+  "clustering_profile": "official_minibatch",
+  "random_seed": 0,
+  "auction_bias": 0.5,
+  "cell_count": 109,
+  "conflict_cell_count": 19,
+  "assignment": [
+    [
+      "node-04",
+      23
+    ],
+    [
+      "node-03",
+      38
+    ],
+    [
+      "node-02",
+      19
+    ],
+    [
+      "node-01",
+      29
+    ]
+  ],
+  "current_metric_tsp": {
+    "planner": "current_metric_tsp",
+    "nodes": [
+      {
+        "node_id": "node-04",
+        "cell_count": 23,
+        "direct_distance_m": 29.85122011945678,
+        "executable_distance_m": 33.886029538283495,
+        "transit_inflation": 1.1351639699375926
+      },
+      {
+        "node_id": "node-03",
+        "cell_count": 38,
+        "direct_distance_m": 41.17877104040642,
+        "executable_distance_m": 43.26578775127645,
+        "transit_inflation": 1.0506818600492511
+      },
+      {
+        "node_id": "node-02",
+        "cell_count": 19,
+        "direct_distance_m": 27.039854642989578,
+        "executable_distance_m": 28.429922915090113,
+        "transit_inflation": 1.0514081266505968
+      },
+      {
+        "node_id": "node-01",
+        "cell_count": 29,
+        "direct_distance_m": 37.09018613064948,
+        "executable_distance_m": 39.75428525985544,
+        "transit_inflation": 1.0718276020460433
+      }
+    ],
+    "direct_makespan_m": 41.17877104040642,
+    "direct_total_m": 135.16003193350224,
+    "direct_distance_cv": 0.16647006376983492,
+    "direct_max_mean_ratio": 1.2186671000689338,
+    "executable_makespan_m": 43.26578775127645,
+    "executable_total_m": 145.3360254645055,
+    "executable_distance_cv": 0.1558210691335363,
+    "planning_runtime_s": 15.70734779999475
+  },
+  "public_code_nn": {
+    "planner": "public_code_nn",
+    "nodes": [
+      {
+        "node_id": "node-04",
+        "cell_count": 23,
+        "direct_distance_m": 34.21638690651277,
+        "executable_distance_m": 44.971154706724306,
+        "transit_inflation": 1.3143162903083865
+      },
+      {
+        "node_id": "node-03",
+        "cell_count": 38,
+        "direct_distance_m": 47.77217095528979,
+        "executable_distance_m": 50.655871196903654,
+        "transit_inflation": 1.060363600480136
+      },
+      {
+        "node_id": "node-02",
+        "cell_count": 19,
+        "direct_distance_m": 28.015027278508736,
+        "executable_distance_m": 30.277443776496913,
+        "transit_inflation": 1.08075724772625
+      },
+      {
+        "node_id": "node-01",
+        "cell_count": 29,
+        "direct_distance_m": 35.714029937539514,
+        "executable_distance_m": 41.60180612126224,
+        "transit_inflation": 1.1648589138223802
+      }
+    ],
+    "direct_makespan_m": 47.77217095528979,
+    "direct_total_m": 145.7176150778508,
+    "direct_distance_cv": 0.19645196874649115,
+    "direct_max_mean_ratio": 1.3113629654113437,
+    "executable_makespan_m": 50.655871196903654,
+    "executable_total_m": 167.50627580138712,
+    "executable_distance_cv": 0.17760616214047026,
+    "planning_runtime_s": 0.0027162999904248863
+  },
+  "improvement_percent": {
+    "executable_makespan": 14.5887994244563,
+    "executable_total": 13.235474450622362
+  },
+  "interpretation": {
+    "executable": "Both visit orders expanded through the local valid-cell 4-neighbour grid-adjacent model.",
+    "public_code_reference": "adamslab-ub/SCoPP main efa53a07013fe5fb7c875bfe9b21a22c0980ad6e",
+    "runtime_warning": "One-shot ordering plus route expansion time; use only as a diagnostic."
+  }
+}

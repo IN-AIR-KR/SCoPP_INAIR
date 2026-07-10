@@ -3,6 +3,10 @@ import pytest
 from scopp.config import ClusteringProfile, PathPlanningProfile, ScoppConfig
 
 
+def test_official_minibatch_is_the_default_profile() -> None:
+    assert ScoppConfig().clustering_profile is ClusteringProfile.OFFICIAL_MINIBATCH
+
+
 def test_config_parses_cli_profile() -> None:
     value = ScoppConfig.from_cli("official_minibatch", 17, 0.25, "metric_tsp")
     assert value.clustering_profile is ClusteringProfile.OFFICIAL_MINIBATCH

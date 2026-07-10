@@ -8,6 +8,12 @@ from math import isfinite
 
 
 class ClusteringProfile(str, Enum):
+    """Available clustering strategies.
+
+    OFFICIAL_MINIBATCH is the SCoPP baseline. DETERMINISTIC_LLOYD is retained
+    only for legacy reproduction and deterministic unit tests.
+    """
+
     DETERMINISTIC_LLOYD = "deterministic_lloyd"
     OFFICIAL_MINIBATCH = "official_minibatch"
 
@@ -19,7 +25,7 @@ class PathPlanningProfile(str, Enum):
 
 @dataclass(frozen=True, slots=True)
 class ScoppConfig:
-    clustering_profile: ClusteringProfile = ClusteringProfile.DETERMINISTIC_LLOYD
+    clustering_profile: ClusteringProfile = ClusteringProfile.OFFICIAL_MINIBATCH
     path_planning_profile: PathPlanningProfile = PathPlanningProfile.PAPER_NN
     random_seed: int = 0
     auction_bias: float = 0.5

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Executable KPI Comparison</title>
+  <style>__STYLE__</style>
+</head>
+<body>
+  <header>
+    <div>
+      <p class="eyebrow">OFFICIAL_MINIBATCH EXECUTABLE COMPARISON</p>
+      <h1>Metric-TSP vs public-code NN</h1>
+      <p id="subtitle"></p>
+    </div>
+    <span class="badge">grid-adjacent executable · no-fly blocked</span>
+  </header>
+
+  <main>
+    <section class="controls panel">
+      <label>Node <select id="nodeSelect" data-testid="node-select"></select></label>
+      <div class="callout" id="orientationNote"></div>
+    </section>
+
+    <section class="comparison">
+      <article class="panel route-panel">
+        <div class="panel-title">
+          <div>
+            <span class="method current">CURRENT</span>
+            <h2>Metric-TSP</h2>
+          </div>
+          <div class="distance" id="metricDistance"></div>
+        </div>
+        <svg id="metricMap" role="img" aria-label="Metric-TSP route"></svg>
+        <div class="leg-grid" id="metricLegs"></div>
+      </article>
+
+      <article class="panel route-panel">
+        <div class="panel-title">
+          <div>
+            <span class="method baseline">BASELINE</span>
+            <h2>public-code NN</h2>
+          </div>
+          <div class="distance" id="nnDistance"></div>
+        </div>
+        <svg id="nnMap" role="img" aria-label="public-code NN route"></svg>
+        <div class="leg-grid" id="nnLegs"></div>
+      </article>
+    </section>
+
+    <section class="panel explanation">
+      <div>
+        <p class="eyebrow">EXECUTABLE KPI</p>
+        <h2 id="finding"></h2>
+        <p id="detail"></p>
+      </div>
+      <div class="delta" id="delta"></div>
+    </section>
+
+    <section class="legend">
+      <span><i class="start"></i>start</span>
+      <span><i class="first"></i>first cell</span>
+      <span><i class="last"></i>last cell</span>
+      <span><i class="path"></i>executed path</span>
+      <span><i class="nofly"></i>no-fly zone</span>
+    </section>
+  </main>
+
+  <script>const D=__DATA__;</script>
+  <script>__SCRIPT__</script>
+</body>
+</html>

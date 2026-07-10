@@ -36,7 +36,7 @@ class ClusteringResult:
     iterations: int
     converged: bool
     tolerance_m: float
-    profile: str = ClusteringProfile.DETERMINISTIC_LLOYD.value
+    profile: str = ClusteringProfile.OFFICIAL_MINIBATCH.value
     random_seed: int | None = None
 
     @property
@@ -49,7 +49,7 @@ def cluster_map(
     *,
     tolerance_m: float | None = None,
     max_iterations: int = 10,
-    profile: ClusteringProfile | str = ClusteringProfile.DETERMINISTIC_LLOYD,
+    profile: ClusteringProfile | str = ClusteringProfile.OFFICIAL_MINIBATCH,
     random_seed: int = 0,
 ) -> ClusteringResult:
     """Apply a selected clustering strategy and identify conflict cells."""

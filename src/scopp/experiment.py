@@ -68,7 +68,7 @@ def run_definition(
     *,
     map_path: str = "<in-memory>",
     auction_bias: float = 0.5,
-    clustering_profile: str = "deterministic_lloyd",
+    clustering_profile: str = ClusteringProfile.OFFICIAL_MINIBATCH.value,
     random_seed: int = 0,
     config: ScoppConfig | None = None,
 ) -> ExperimentReport:
@@ -123,7 +123,7 @@ def run_experiment(
     map_path: str | Path,
     *,
     auction_bias: float = 0.5,
-    clustering_profile: str = "deterministic_lloyd",
+    clustering_profile: str = ClusteringProfile.OFFICIAL_MINIBATCH.value,
     random_seed: int = 0,
     config: ScoppConfig | None = None,
 ) -> ExperimentReport:

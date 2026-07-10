@@ -6,45 +6,46 @@
   "cell_width_m": 0.9237604307034012,
   "cell_count": 109,
   "node_count": 4,
-  "conflict_cell_count": 15,
-  "clustering_iterations": 5,
+  "conflict_cell_count": 19,
+  "clustering_iterations": 1,
   "clustering_converged": true,
-  "clustering_profile": "deterministic_lloyd",
-  "random_seed": null,
+  "clustering_profile": "official_minibatch",
+  "path_planning_profile": "paper_nn",
+  "random_seed": 0,
   "auction_bias": 0.5,
   "node_metrics": [
     {
-      "node_id": "node-01",
-      "cell_count": 26,
-      "distance_m": 30.516680952821428
-    },
-    {
-      "node_id": "node-02",
-      "cell_count": 28,
-      "distance_m": 30.277443776496916
+      "node_id": "node-04",
+      "cell_count": 23,
+      "distance_m": 44.971154706724306
     },
     {
       "node_id": "node-03",
-      "cell_count": 28,
-      "distance_m": 37.723225167056036
+      "cell_count": 38,
+      "distance_m": 50.655871196903654
     },
     {
-      "node_id": "node-04",
-      "cell_count": 27,
-      "distance_m": 35.73355039969029
+      "node_id": "node-02",
+      "cell_count": 19,
+      "distance_m": 30.277443776496913
+    },
+    {
+      "node_id": "node-01",
+      "cell_count": 29,
+      "distance_m": 41.60180612126224
     }
   ],
-  "cell_count_range": 2,
-  "cell_count_cv": 0.030427750370233025,
-  "distance_range_m": 7.4457813905591195,
-  "distance_cv": 0.09665433740449435,
-  "makespan_distance_m": 37.723225167056036,
-  "total_distance_m": 134.25090029606466,
+  "cell_count_range": 19,
+  "cell_count_cv": 0.2625520737844805,
+  "distance_range_m": 20.37842742040674,
+  "distance_cv": 0.17760616214047026,
+  "makespan_distance_m": 50.655871196903654,
+  "total_distance_m": 167.50627580138712,
   "timings": {
-    "discretization_s": 0.02055889999610372,
-    "clustering_s": 0.029121200001100078,
-    "auction_s": 0.00021940001170150936,
-    "path_planning_s": 0.0033224999788217247,
-    "total_s": 0.05322410000371747
+    "discretization_s": 0.02560059999814257,
+    "clustering_s": 0.5827049000072293,
+    "auction_s": 0.00014009998994879425,
+    "path_planning_s": 0.0037659000081475824,
+    "total_s": 0.6122128999850247
   }
 }
