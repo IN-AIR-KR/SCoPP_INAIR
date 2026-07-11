@@ -72,3 +72,14 @@ python scripts/compare_path_planners.py examples/maps/indoor_lab.yaml --seed 0 -
 - 최종 KPI 보고는 direct-distance 숫자를 사용하지 않는다.
 
 ---
+
+## Attribution and third-party software
+
+MICPP_INAIR is an independently structured derivative implementation informed by the SCoPP paper and the authors' MIT-licensed official implementation. It is not a byte-for-byte copy or an official release of the SCoPP authors.
+
+- Upstream reference: [adamslab-ub/SCoPP](https://github.com/adamslab-ub/SCoPP)
+- Paper: Collins et al., *Scalable Coverage Path Planning of Multi-Robot Teams for Monitoring Non-Convex Areas*, ICRA 2021, arXiv:2103.14709
+- Retained reference behavior: clustering, conflict-cell auction, and coverage-path planning baseline
+- Project adaptations: indoor Cartesian maps, boundary policies, no-fly handling, executable transit, KPI reporting, and experiment UIs
+
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for dependency and attribution details. No license is granted for this repository's original work merely by this notice; a repository-level license must be selected separately by its owner.
