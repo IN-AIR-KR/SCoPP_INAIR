@@ -1,6 +1,6 @@
 # Third-Party Notices and Attribution
 
-This project uses open-source software and is informed by published research. This notice distinguishes upstream reference behavior, installed dependencies, and project-specific adaptations.
+This project uses open-source software and references published research. The following information records the main upstream reference and runtime dependencies.
 
 ## SCoPP upstream reference
 
@@ -10,11 +10,11 @@ This project uses open-source software and is informed by published research. Th
 - Paper: L. Collins, P. Ghassemi, S. Chowdhury, K. Dantu, E. Esfahani, and D. Doermann, ICRA 2021, arXiv:2103.14709
 - Code reference used for parity review: `monitoring_algorithms.py` and `SCoPP_settings.py` from the upstream `main` branch
 
-MICPP_INAIR is an independently structured derivative implementation. It preserves SCoPP behavior as an explicit comparison and reproduction baseline; it is not represented as an official SCoPP release or a byte-for-byte reproduction.
+MICPP_INAIR keeps SCoPP behavior as a comparison and reproduction baseline while adding project-specific indoor planning features.
 
 Project-specific adaptations include indoor Cartesian map handling, no-fly-zone geometry, executable transit constraints, KPI reporting, and experiment user interfaces.
 
-The upstream SCoPP license and copyright notice remain available in its official repository. If upstream source files or substantial source fragments are copied into this repository in the future, their MIT copyright and license text must accompany those copies.
+The upstream SCoPP license and copyright information are available in its official repository.
 
 ## Runtime dependencies
 
@@ -26,8 +26,4 @@ The project installs and imports the following third-party Python packages rathe
 - scikit-learn
 - Shapely
 
-The test environment additionally uses pytest. Each dependency remains governed by its own license and copyright notices as distributed by its maintainers.
-
-## Project license status
-
-This notice does not select a license for the original work in this repository. The repository owner should add a root `LICENSE` file before inviting unrestricted reuse or external contributions.
+The test environment additionally uses pytest. Each dependency is distributed under the terms provided by its maintainers.
